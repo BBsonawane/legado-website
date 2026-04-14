@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import WaitlistForm from "@/components/WaitlistForm";
-import { FiGlobe, FiShield, FiTrendingUp } from "react-icons/fi";
+import { FiPieChart, FiCalendar, FiCompass } from "react-icons/fi";
 
 export default function Home() {
   return (
@@ -13,23 +13,9 @@ export default function Home() {
             You moved here for work. You're earning well. So why does your bank account feel like a lie?
           </h1>
           <p className={styles.subheadline}>
-            Legado is the financial guidance app built specifically for immigrants who are settling abroad. We cut through the confusion of cross-border taxes, foreign investments, and long-term planning, so you can build wealth with confidence.
+            Most immigrants earn well but watch their money quietly disappear — because nobody in their life can tell them what to do with it. Legado gives you a clear, personalised plan so you always know exactly what to do with your money.
           </p>
           <WaitlistForm />
-        </div>
-      </section>
-
-      {/* Social Proof Section */}
-      <section className={styles.socialProof}>
-        <div className="container">
-          <h3>Trusted by expats from</h3>
-          <div className={styles.logos}>
-            <div className={styles.logoPlaceholder}>Google</div>
-            <div className={styles.logoPlaceholder}>Amazon</div>
-            <div className={styles.logoPlaceholder}>Meta</div>
-            <div className={styles.logoPlaceholder}>Microsoft</div>
-            <div className={styles.logoPlaceholder}>Spotify</div>
-          </div>
         </div>
       </section>
 
@@ -40,31 +26,31 @@ export default function Home() {
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}>
-                <FiGlobe />
+                <FiPieChart />
               </div>
-              <h3 className={styles.featureTitle}>Cross-Border Clarity</h3>
+              <h3 className={styles.featureTitle}>Financial Health Snapshot</h3>
               <p className={styles.featureDesc}>
-                Understand how your home country's laws interact with your new home's taxes. No more surprises when you transfer money or invest globally.
+                See exactly where your money is going the moment you open the app. No jargon, no guesswork — just a clear picture of your financial reality.
               </p>
             </div>
             
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}>
-                <FiTrendingUp />
+                <FiCalendar />
               </div>
-              <h3 className={styles.featureTitle}>Optimised Investing</h3>
+              <h3 className={styles.featureTitle}>Your Payday Plan</h3>
               <p className={styles.featureDesc}>
-                Don't leave your cash in a low-interest checking account. Learn the right tax-advantaged accounts to open and the right index funds to buy.
+                Every time you get paid, Legado tells you exactly what to do with that paycheck — how much to save, how much to send home, and how much to keep.
               </p>
             </div>
 
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}>
-                <FiShield />
+                <FiCompass />
               </div>
-              <h3 className={styles.featureTitle}>Secure Your Legacy</h3>
+              <h3 className={styles.featureTitle}>Life Event Playbooks</h3>
               <p className={styles.featureDesc}>
-                Whether you plan to stay forever or eventually return home, we help you structure a resilient financial plan that protects your family's future.
+                Just got a raise? Renewing your visa? Legado gives you a step-by-step financial playbook for every major moment in your immigrant life.
               </p>
             </div>
           </div>

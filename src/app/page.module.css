@@ -109,31 +109,4 @@
   line-height: 1.6;
 }
 
-.socialProof {
-  padding: var(--spacing-xl) 0;
-  text-align: center;
-  background-color: var(--color-bg);
-}
 
-.socialProof h3 {
-  font-size: 1.1rem;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: var(--spacing-md);
-}
-
-.logos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--spacing-xl);
-  opacity: 0.6;
-  filter: grayscale(100%);
-}
-
-.logoPlaceholder {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--color-text-primary);
-}
