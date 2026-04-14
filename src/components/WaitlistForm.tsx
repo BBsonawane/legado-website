@@ -30,7 +30,7 @@ export default function WaitlistForm() {
     setStatus('loading');
 
     try {
-      const res = await fetch('/api/waitlist', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

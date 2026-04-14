@@ -8,8 +8,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
     }
 
-    const BEEHIIV_PUB_ID = "Legado";
-    const BEEHIIV_API_KEY = "9f12a8cb-f37b-451f-b5ab-da9bd0675a5d";
+    const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
+    const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
 
     const response = await fetch(`https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`, {
       method: 'POST',
