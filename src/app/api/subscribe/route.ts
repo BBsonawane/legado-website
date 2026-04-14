@@ -8,28 +8,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
     }
 
-    const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
-    const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+    const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
 
-    const response = await fetch(`https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`, {
+    if (!GOOGLE_SCRIPT_URL) {
+      console.error("Missing GOOGLE_SCRIPT_URL");
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${BEEHIIV_API_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({
-        email: email,
-        reactivate_existing: false,
-        send_welcome_email: true,
-        utm_source: 'legado_website',
-      }),
+      body: `email=${encodeURIComponent(email)}`,
     });
 
-    const data = await response.json();
+    let data;
+    const textData = await response.text();
+    try {
+      data = JSON.parse(textData);
+    } catch (e) {
+      data = { message: textData };
+    }
 
     if (!response.ok) {
-      console.error('Beehiiv API Error:', data);
-      return NextResponse.json({ error: data?.message || JSON.stringify(data) }, { status: response.status });
+      console.error('Google Apps Script Error:', data);
+      return NextResponse.json({ error: data?.message || textData }, { status: response.status });
     }
 
     return NextResponse.json({ message: 'Successfully subscribed' }, { status: 201 });
