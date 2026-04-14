@@ -1,65 +1,75 @@
 import Image from "next/image";
+import styles from "./page.module.css";
+import WaitlistForm from "@/components/WaitlistForm";
+import { FiGlobe, FiShield, FiTrendingUp } from "react-icons/fi";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className={styles.main}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className="container animate-fade-in">
+          <h1 className={styles.headline}>
+            You moved here for work. You're earning well. So why does your bank account feel like a lie?
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className={styles.subheadline}>
+            Legado is the financial guidance app built specifically for immigrants who are settling abroad. We cut through the confusion of cross-border taxes, foreign investments, and long-term planning, so you can build wealth with confidence.
           </p>
+          <WaitlistForm />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className={styles.socialProof}>
+        <div className="container">
+          <h3>Trusted by expats from</h3>
+          <div className={styles.logos}>
+            <div className={styles.logoPlaceholder}>Google</div>
+            <div className={styles.logoPlaceholder}>Amazon</div>
+            <div className={styles.logoPlaceholder}>Meta</div>
+            <div className={styles.logoPlaceholder}>Microsoft</div>
+            <div className={styles.logoPlaceholder}>Spotify</div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Features Section */}
+      <section className={styles.featuresSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>Built for your unique financial journey</h2>
+          <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                <FiGlobe />
+              </div>
+              <h3 className={styles.featureTitle}>Cross-Border Clarity</h3>
+              <p className={styles.featureDesc}>
+                Understand how your home country's laws interact with your new home's taxes. No more surprises when you transfer money or invest globally.
+              </p>
+            </div>
+            
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                <FiTrendingUp />
+              </div>
+              <h3 className={styles.featureTitle}>Optimised Investing</h3>
+              <p className={styles.featureDesc}>
+                Don't leave your cash in a low-interest checking account. Learn the right tax-advantaged accounts to open and the right index funds to buy.
+              </p>
+            </div>
+
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                <FiShield />
+              </div>
+              <h3 className={styles.featureTitle}>Secure Your Legacy</h3>
+              <p className={styles.featureDesc}>
+                Whether you plan to stay forever or eventually return home, we help you structure a resilient financial plan that protects your family's future.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
