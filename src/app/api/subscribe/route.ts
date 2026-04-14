@@ -29,12 +29,12 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error('Beehiiv API Error:', data);
-      return NextResponse.json({ error: 'Failed to join waitlist. Please try again later.' }, { status: response.status });
+      return NextResponse.json({ error: data?.message || JSON.stringify(data) }, { status: response.status });
     }
 
     return NextResponse.json({ message: 'Successfully subscribed' }, { status: 201 });
   } catch (error) {
     console.error('Error processing waitlist signup:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }

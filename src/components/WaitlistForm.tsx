@@ -38,16 +38,17 @@ export default function WaitlistForm() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await res.json();
       if (!res.ok) {
-        throw new Error();
+        throw new Error(data?.error || 'Something went wrong.');
       }
 
       setStatus('success');
       setMessage("You're on the list. We'll reach out before launch.");
       setEmail('');
-    } catch (err) {
+    } catch (err: any) {
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage(err?.message || 'Something went wrong. Please try again.');
     }
   };
 
