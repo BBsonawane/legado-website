@@ -8,9 +8,24 @@ export default function WaitlistForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    
+    if (!email) {
+      setStatus('error');
+      setMessage('Please enter an email address.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setStatus('error');
+      setMessage('Please enter a valid email address.');
+      return;
+    }
 
     setStatus('loading');
 
@@ -23,18 +38,16 @@ export default function WaitlistForm() {
         body: JSON.stringify({ email }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data.error || 'Something went wrong');
+        throw new Error();
       }
 
       setStatus('success');
-      setMessage("You're on the list! Keep an eye on your inbox.");
+      setMessage("You're on the list. We'll reach out before launch.");
       setEmail('');
-    } catch (err: any) {
+    } catch (err) {
       setStatus('error');
-      setMessage(err.message || 'Failed to join waitlist. Please try again.');
+      setMessage('Something went wrong. Please try again.');
     }
   };
 
@@ -49,7 +62,13 @@ export default function WaitlistForm() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (status === 'error') {
+                setStatus('idle');
+                setMessage('');
+              }
+            }}
             placeholder="Enter your email address"
             className={styles.input}
             disabled={status === 'loading'}

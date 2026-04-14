@@ -8,15 +8,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
     }
 
-    // Replace with your actual Beehiiv Publication ID and API Key
-    const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUB_ID;
-    const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
-
-    if (!BEEHIIV_PUB_ID || !BEEHIIV_API_KEY) {
-      // If no API keys are set, we just simulate success for the template.
-      console.log('Simulating Beehiiv signup for:', email);
-      return NextResponse.json({ message: 'Success (simulated)' }, { status: 200 });
-    }
+    const BEEHIIV_PUB_ID = "Legado";
+    const BEEHIIV_API_KEY = "9f12a8cb-f37b-451f-b5ab-da9bd0675a5d";
 
     const response = await fetch(`https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`, {
       method: 'POST',
