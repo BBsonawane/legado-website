@@ -1,4 +1,5 @@
-<style>
+export default function PrivacyPage() {
+  const termlyHTML = `<style>
   [data-custom-class='body'], [data-custom-class='body'] * {
           background: transparent !important;
         }
@@ -74,4 +75,10 @@ word-break: break-word !important;
       }
     </style>
       </div>
-      <br><div><span data-custom-class='body_text'>This Privacy Policy was created using Termly's </span><a href="https://termly.io/products/privacy-policy-generator/" target="_blank" rel="noopener external" data-custom-class='link'>Privacy Policy Generator</a></div>
+      <br><div><span data-custom-class='body_text'>This Privacy Policy was created using Termly's </span><a href="https://termly.io/products/privacy-policy-generator/" target="_blank" rel="noopener external" data-custom-class='link'>Privacy Policy Generator</a></div>`;
+  return (
+    <main style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem' }}>
+      <div dangerouslySetInnerHTML={{ __html: termlyHTML }} />
+    </main>
+  );
+}
