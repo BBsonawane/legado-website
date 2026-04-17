@@ -33,40 +33,45 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         scrolled
-          ? "bg-primary-bg/90 backdrop-blur-xl border-b border-border-light shadow-sm"
-          : "bg-transparent"
+          ? "bg-white/92 backdrop-blur-[20px] border-b border-border shadow-sm h-16"
+          : "bg-transparent h-[72px]"
       }`}
     >
-      <div className="section-container">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo — serif for premium financial feel */}
+      <div className="max-w-[1440px] mx-auto px-[clamp(1.5rem,5vw,4rem)] h-full">
+        <div className="flex items-center justify-between h-full">
+          {/* Logo */}
           <Link
             href="/"
-            className="font-heading text-accent-secondary text-2xl sm:text-[1.65rem] tracking-tight hover:text-accent transition-colors"
+            className="flex items-center gap-2 group"
           >
-            Legado
+            <span className="w-2 h-2 rounded-full bg-accent-green mb-0.5" />
+            <span className="text-text-primary font-extrabold text-[1.375rem] tracking-[-0.02em]">
+              Legado
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             <Link
               href="/about"
-              className="text-text-secondary hover:text-text-primary transition-colors text-[0.9rem] font-medium"
+              className="text-text-secondary hover:text-text-primary transition-colors text-[0.9375rem] font-medium relative py-1 group"
             >
               About
+              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent-green transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link
               href="/contact"
-              className="text-text-secondary hover:text-text-primary transition-colors text-[0.9rem] font-medium"
+              className="text-text-secondary hover:text-text-primary transition-colors text-[0.9375rem] font-medium relative py-1 group"
             >
               Contact
+              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent-green transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link
               href={pathname === "/" ? "#hero-waitlist" : "/"}
               onClick={handleWaitlistClick}
-              className="bg-accent hover:bg-accent-secondary text-white font-semibold text-[0.9rem] px-5 py-2.5 rounded-full transition-all duration-200 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+              className="bg-accent-primary hover:bg-[#333333] text-white font-semibold text-[0.9375rem] px-5 py-2 rounded-[8px] transition-all duration-200 hover:shadow-md"
             >
               Join Waitlist
             </Link>
@@ -75,22 +80,22 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 ${
-                isOpen ? "rotate-45 translate-y-2" : ""
+              className={`block w-6 h-[1.5px] bg-text-primary transition-all duration-300 ${
+                isOpen ? "rotate-45 translate-y-[7.5px]" : ""
               }`}
             />
             <span
-              className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 ${
+              className={`block w-6 h-[1.5px] bg-text-primary transition-all duration-300 ${
                 isOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 ${
-                isOpen ? "-rotate-45 -translate-y-2" : ""
+              className={`block w-6 h-[1.5px] bg-text-primary transition-all duration-300 ${
+                isOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
               }`}
             />
           </button>
@@ -98,27 +103,27 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isOpen ? "max-h-64 pb-6" : "max-h-0"
+          className={`md:hidden absolute top-full left-0 right-0 bg-white border-b border-border overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? "max-h-[300px] shadow-lg" : "max-h-0"
           }`}
         >
-          <div className="flex flex-col gap-4 pt-2">
+          <div className="flex flex-col p-6 gap-6">
             <Link
               href="/about"
-              className="text-text-secondary hover:text-text-primary transition-colors text-base font-medium py-2"
+              className="text-text-secondary hover:text-text-primary text-[1.0625rem] font-medium"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="text-text-secondary hover:text-text-primary transition-colors text-base font-medium py-2"
+              className="text-text-secondary hover:text-text-primary text-[1.0625rem] font-medium"
             >
               Contact
             </Link>
             <Link
               href={pathname === "/" ? "#hero-waitlist" : "/"}
               onClick={handleWaitlistClick}
-              className="bg-accent hover:bg-accent-secondary text-white font-semibold text-base px-5 py-3 rounded-full transition-all duration-200 text-center w-fit"
+              className="bg-accent-primary text-white font-semibold text-[1.0625rem] px-5 py-4 rounded-[8px] text-center"
             >
               Join Waitlist
             </Link>

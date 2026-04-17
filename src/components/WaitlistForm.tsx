@@ -48,52 +48,75 @@ export default function WaitlistForm({ source, id }: WaitlistFormProps) {
     }
   };
 
-  return (
-    <div id={id} className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            if (status === "error") setStatus("idle");
-          }}
-          placeholder="Enter your work email"
-          className="flex-1 px-4 py-3.5 bg-primary-card border border-border rounded-xl text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-[0.9rem] shadow-sm"
-          disabled={status === "loading" || status === "success"}
-          aria-label="Email address"
-        />
-        <button
-          type="submit"
-          disabled={status === "loading" || status === "success"}
-          className="px-6 py-3.5 bg-accent hover:bg-accent-secondary text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 text-[0.9rem] whitespace-nowrap min-h-[44px] flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
-        >
-          {status === "loading" ? (
-            <>
-              <span className="spinner" />
-              Joining...
-            </>
-          ) : status === "success" ? (
-            "You're in! ✓"
-          ) : (
-            "Join the Waitlist"
-          )}
-        </button>
-      </form>
+  const [focus, setFocus] = useState(false);
 
-      {status === "success" && (
-        <p className="mt-3 text-accent-secondary text-sm font-medium animate-fade-in">
-          You&apos;re on the list. We&apos;ll reach out before anyone else.
+  return (
+    <div id={id} className="w-full">
+      <div 
+        className={`bg-white border border-border p-7 rounded-2xl shadow-lg transition-all duration-300 ${
+          focus ? "ring-[3px] ring-accent-green/10 border-accent-green" : ""
+        }`}
+      >
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (status === "error") setStatus("idle");
+            }}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            placeholder="Enter your email"
+            className="w-full px-4 py-3.5 bg-primary-secondary border border-border-strong rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-green transition-all text-base"
+            disabled={status === "loading" || status === "success"}
+            aria-label="Email address"
+          />
+          <button
+            type="submit"
+            disabled={status === "loading" || status === "success"}
+            className="w-full px-6 py-3.5 bg-accent-primary hover:bg-[#333333] text-white font-bold rounded-lg transition-all duration-200 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm border-none"
+          >
+            {status === "loading" ? (
+              <span className="spinner border-white border-t-accent-green" />
+            ) : status === "success" ? (
+              "You're in! ✓"
+            ) : (
+              "Join the Waitlist →"
+            )}
+          </button>
+        </form>
+
+        {status === "success" && (
+          <p className="mt-4 text-accent-green text-sm font-semibold animate-fade-in text-center">
+            You&apos;re on the list. We&apos;ll reach out soon.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="mt-4 text-red-600 text-sm animate-fade-in text-center">{errorMsg}</p>
+        )}
+        
+        <p className="mt-4 text-text-muted text-[0.8125rem] text-center">
+          Free to join · No spam · Ever
         </p>
-      )}
-      {status === "error" && (
-        <p className="mt-3 text-red-600 text-sm animate-fade-in">{errorMsg}</p>
-      )}
-      {status === "idle" && (
-        <p className="mt-3 text-text-muted text-xs">
-          Free to join. No spam. Ever.
-        </p>
-      )}
+      </div>
+
+      {/* Trust Badges */}
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
+        {[
+          { icon: "🔒", text: "Bank-level security" },
+          { icon: "🇺🇸", text: "Built for the US system" },
+          { icon: "💬", text: "No financial jargon" },
+        ].map((badge, i) => (
+          <span 
+            key={i}
+            className="flex items-center gap-2 px-3.5 py-1.5 bg-primary-tertiary border border-border rounded-full text-[0.75rem] font-medium text-text-muted"
+          >
+            <span>{badge.icon}</span>
+            {badge.text}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

@@ -35,7 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-inter">
+      <body className="antialiased">
+        <div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-green to-[#86EFAC] z-[110]" />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
